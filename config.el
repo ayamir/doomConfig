@@ -124,7 +124,7 @@
 
 ;; org-download
 (use-package org-download
-	  ;;将截屏功能绑定到快捷键：Ctrl + Shift + Y
+	  ;; Keybind：Ctrl + Shift + Y
 	  :bind ("C-S-y" . org-download-clipboard)
 	  :config
 	  (require 'org-download)
