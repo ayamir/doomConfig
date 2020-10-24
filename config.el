@@ -1,0 +1,1 @@
+/home/mir/.doom.d/config.el
