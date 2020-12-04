@@ -26,12 +26,12 @@
   ;; english font
   (if (display-graphic-p)
       (progn
-        (set-face-attribute 'default nil :font (format "%s:pixelsize=%d" "JetBrainsMono Nerd Font" 21)) ;; 11 13 17 19 23
+        (set-face-attribute 'default nil :font (format "%s:pixelsize=%d" "VictorMono Nerd Font" 19)) ;; 11 13 17 19 23
         ;; chinese font
         (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
                             charset
-                            (font-spec :family "Sarasa Mono SC Nerd")))) ;; 14 16 20 22 28
+                            (font-spec :family "Sarasa UI SC")))) ;; 14 16 20 22 28
     ))
 
 (defun +my|init-font(frame)
@@ -51,8 +51,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
-;(load-theme 'nord t)
+(setq doom-theme 'doom-nord-light)
+;(load-theme 'nord-light t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -83,21 +83,24 @@
 ;; Project Path
 (projectile-add-known-project "~/Sync/org")
 (projectile-add-known-project "~/Sync/Homework")
-(projectile-add-known-project "~/code/haskell")
+(projectile-add-known-project "~/code/cpp")
 (projectile-add-known-project "~/go/src/learn")
 (projectile-add-known-project "~/go/src/leetcode")
 
 ;; Org Mode Config
-
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+;; Shortcut
 (map! :leader
       :desc "rainbow-mode"
       "r" #'rainbow-mode)
 (map! :leader
       :desc "comment"
       "C-c" #'comment-line)
+(map! :leader
+      :desc "treemacs"
+      "C-d" #'treemacs)
 
 (require 'rainbow-mode)
 (dolist (hook '(css-mode-hook
@@ -136,5 +139,36 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+;； Org2tex
 (require 'org2ctex)
 (org2ctex-toggle t)
+
+;; Ligatures
+
+;; Input
+(use-package rime
+  :custom
+  (default-input-method "rime"))
+
+(require 'rime)
+
+(setq rime-user-data-dir "~/.local/share/fcitx5/rime")
+
+(setq rime-posframe-properties
+      (list :background-color "#2E3440"
+            :foreground-color "#D8DEE9"
+            :background "D8DEE9"
+            :foreground "2E3440"
+            :font "Sarasa Mono SC Nerd-13"
+            :internal-border-width 2))
+(setq default-input-method "rime"
+      rime-show-candidate 'posframe)
+
+(setq rime-disable-predicates
+      '(rime-predicate-evil-mode-p
+        rime-predicate-after-alphabet-char-p
+        rime-predicate-prog-in-code-p))
+
+(setq mode-line-mule-info '((:eval (rime-lighter))))
+(setq rime-inline-ascii-trigger 'shift-l)
+(setq rime-inline-ascii-holder ?x)
