@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "mir"
-      user-mail-address "miracle_l@bupt.edu.cn")
+(setq user-full-name "ayamir"
+      user-mail-address "lgt986452565@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -26,7 +26,7 @@
   ;; english font
   (if (display-graphic-p)
       (progn
-        (set-face-attribute 'default nil :font (format "%s:pixelsize=%d" "VictorMono Nerd Font" 19)) ;; 11 13 17 19 23
+        (set-face-attribute 'default nil :font (format "%s:pixelsize=%d" "Fira Code" 18)) ;; 11 13 17 19 23
         ;; chinese font
         (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
@@ -51,7 +51,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord-light)
+(setq doom-theme 'doom-nord)
 ;(load-theme 'nord-light t)
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -81,11 +81,8 @@
 ;; they are implemented.
 
 ;; Project Path
-(projectile-add-known-project "~/Sync/org")
-(projectile-add-known-project "~/Sync/Homework")
-(projectile-add-known-project "~/code/cpp")
-(projectile-add-known-project "~/go/src/learn")
-(projectile-add-known-project "~/go/src/leetcode")
+
+
 
 ;; Org Mode Config
 (require 'org-bullets)
@@ -143,7 +140,19 @@
 (require 'org2ctex)
 (org2ctex-toggle t)
 
-;; Ligatures
+;; Tabs
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-set-bar 'under)
+(setq centaur-tabs-set-modified-marker t)
+(setq centaur-tabs--buffer-show-groups t)
+(setq uniquify-separator "/")
+(setq uniquify-buffer-name-style 'forward)
+(use-package centaur-tabs
+  :bind ("C-c g" . centaur-tabs-toggle-groups)
+  :bind ("C-c h" . centaur-tabs-backward)
+  :bind ("C-c l" . centaur-tabs-forward)
+  :bind ("C-c k" . centaur-tabs-kill-other-buffers-in-current-group)
+  :bind ("C-c C-k" . centaur-tabs-kill-all-buffers-in-current-group))
 
 ;; Input
 (use-package rime
